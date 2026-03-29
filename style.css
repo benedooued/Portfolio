@@ -795,17 +795,7 @@ section {
     color: #555;
 }
 
-/* Footer responsive */
-@media (max-width: 800px) {
-    .footer {
-        padding: 50px 5% 0;
-    }
 
-    .footer-container {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-}
 
 /* ============================================================
    RESPONSIVE — Tablet (≤ 1425px)
@@ -890,6 +880,10 @@ section {
     .service-content {
         grid-template-columns: 1fr;
     }
+
+     .home {
+        padding-top: 110px;
+    }
 }
 
 /* ============================================================
@@ -919,6 +913,7 @@ section {
     }
 
     .home {
+          padding-top: 100px;
         grid-template-columns: 1fr;
         text-align: center;
         justify-items: center;
@@ -957,6 +952,15 @@ section {
     .col img {
         width: 100%;
         height: 280px;
+    }
+
+        .footer {
+        padding: 50px 5% 0;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
     }
 }
 
