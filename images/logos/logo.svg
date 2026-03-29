@@ -1,0 +1,24 @@
+<svg width="400" height="130" viewBox="0 0 400 130" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bg { fill: #0d1117; }
+    .name-normal { font-family: 'Courier New', monospace; font-size: 32px; font-weight: 700; fill: #f0f6fc; }
+    .name-accent { font-family: 'Courier New', monospace; font-size: 32px; font-weight: 700; fill: #4ade80; }
+    .error-tag { font-family: 'Courier New', monospace; font-size: 10px; font-weight: 400; fill: #ff6b6b; }
+    .error-msg { font-family: 'Courier New', monospace; font-size: 8px; fill: #6e7681; }
+  </style>
+
+  <rect width="400" height="130" rx="10" fill="#0d1117"/>
+  <circle cx="22" cy="18" r="4" fill="#ff5f57"/>
+  <circle cx="36" cy="18" r="4" fill="#febc2e"/>
+  <circle cx="50" cy="18" r="4" fill="#28c840"/>
+  <line x1="12" y1="30" x2="388" y2="30" stroke="#21262d" stroke-width="1"/>
+
+  <text x="22" y="72" font-family="'Courier New', monospace" font-size="14" fill="#4ade80" font-weight="700">~/</text>
+  <text x="46" y="72" class="name-normal">bene</text>
+  <text x="114" y="72" class="name-accent">do</text>
+  <text x="142" y="72" class="name-normal">ued</text>
+  <rect x="190" y="54" width="8" height="20" fill="#4ade80" opacity="0.9"/>
+
+  <text x="22" y="95" class="error-tag">SyntaxError<tspan fill="#6e7681">: </tspan><tspan fill="#e3b341">Unexpected genius</tspan><tspan fill="#6e7681"> at line 1</tspan></text>
+  <text x="22" y="112" class="error-msg">at Object.&lt;anonymous&gt; (benedoued.js:1:1)</text>
+</svg>

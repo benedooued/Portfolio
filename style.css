@@ -41,8 +41,30 @@ header.sticky {
     padding: 12px 5%;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
 }
+
+/* Header transparent — texte blanc sur l'image de fond */
+header:not(.sticky) .navlist a {
+    color: #ffffff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+header:not(.sticky) .top-btn {
+    border-color: #ffffff;
+    color: #ffffff;
+}
+
+/* Quand sticky — retour au noir normal */
+header.sticky .navlist a {
+    color: var(--text-color);
+}
+
+header.sticky .top-btn {
+    border-color: var(--main-color);
+    color: var(--main-color);
+}
+
 body {
-    padding-top: 90px;
+    padding-top: 0px;
     background: var(--bg-color);
     color: var(--text-color);
 }
@@ -125,13 +147,12 @@ span {
     background: transparent;
     border: 2px solid var(--main-color);
     border-radius: 30px;
-    color: var(--text-color);
+    color: var(--main-color);  /* ← était var(--text-color) = noir invisible */
     letter-spacing: 1px;
     font-size: var(--p-font);
     font-weight: 500;
     transition: ease 0.50s;
 }
-
 .top-btn:hover {
     transform: scale(1.1);
     background: var(--main-color);
@@ -182,6 +203,7 @@ section {
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
     grid-gap: 4rem;
+    padding-top: 90px; 
 }
 
 .home-text h3 {
