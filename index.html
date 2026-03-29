@@ -267,18 +267,22 @@
          <p>Have a project in mind or want to discuss an opportunity? Drop your email and I'll get back to you within 24 hours.</p>
       </div>
       <div class="action">
-         <form action="mailto:your@email.com" method="POST" enctype="text/plain">
-    <input type="email" name="email" placeholder="Your email" required>
+    <form id="contact-form">
+  <input type="text" name="from_name" placeholder="Your name" required>
 
-    <input type="text" name="subject" placeholder="Subject" required>
+  <input type="email" name="from_email" placeholder="Your email" required>
 
-    <textarea name="message" rows="5" placeholder="Write your message..." required></textarea>
+  <input type="text" name="subject" placeholder="Subject" required>
 
-    <input type="submit" value="Send Message">
+  <textarea name="message" rows="5" placeholder="Write your message..." required></textarea>
+
+  <input type="submit" value="Send Message">
 </form>
       </div>
    </div>
 </section>
+
+
 <footer class="footer">
     <div class="footer-container">
         <div class="footer-brand">
@@ -309,7 +313,8 @@
     </div>
 </footer>
 
-      
-    <script type="text/javascript" src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script src="script.js"></script>
+    
 </body>
 </html>
