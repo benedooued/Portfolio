@@ -27,16 +27,3 @@ if (projectStat) {
     projectStat.textContent = projectCount + '+';
 }
 
-// Téléchargement CV
-const cvBtn = document.querySelector('.cv-btn');
-if (cvBtn) {
-    cvBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        const link = document.createElement('a');
-        link.href = 'cv.pdf';           // ← mets ton vrai chemin ici
-        link.download = 'CV_Benedoued.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    });
-}
