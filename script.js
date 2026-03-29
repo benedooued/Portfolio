@@ -13,10 +13,10 @@ menu.onclick = () => {
 };
 
 window.onscroll = () => {
+    header.classList.toggle("sticky", window.scrollY > 0);
     menu.classList.remove('bx-x');
     navlist.classList.remove('active');
 };
-
 const projectCount = document.querySelectorAll('.portefolio .portfolio-content .col').length;
 const projectStat = document.querySelector('.cta-box .wrap.one h3');
 
