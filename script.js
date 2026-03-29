@@ -16,3 +16,10 @@ window.onscroll = () => {
     menu.classList.remove('bx-x');
     navlist.classList.remove('active');
 };
+
+const projectCount = document.querySelectorAll('.portefolio .portfolio-content .col').length;
+const projectStat = document.querySelector('.cta-box .wrap.one h3');
+
+if (projectStat) {
+    projectStat.textContent = projectCount + '+';
+}

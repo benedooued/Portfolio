@@ -10,7 +10,8 @@
 :root {
     --bg-color:#ffffff;
     --text-color:#000;
-    --secound-color:#a09dab;
+    --second-color:#a09dab;
+    --second-bg-color:#f5f5f5;
     --main-color:#f75023;
     --big-font:5rem;
     --h2-font:3rem;
@@ -167,7 +168,7 @@ span{
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: rgba(128,103,240,1);
+    background: rgb(234, 102, 14);
     font-size: 17px;
     color: var(--bg-color);
     margin-right: 22px;
@@ -210,47 +211,94 @@ header.sticky{
     padding: 13px 18%;
     box-shadow: 0px 0px 10px rgb(0 0 0 / 10%);
 }
-
-.items{
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(120px,auto));
-    grid-gap: 12rem;
-    align-items: center;
+.skills-section {
+    background: var(--second-bg-color);
     text-align: center;
-
-}
-.sub-box{
-    padding: 45px 45px 45px 45px;
-    transition: ease .50s;
-    cursor: pointer;
 }
 
-.sub-img img{
-    max-width: 100%;
-    width: 100px;
-    height: auto;
-    margin-bottom: 20px;
+.skills-container {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
 }
 
-.sub-box h3{
-    margin-bottom: 20px;
-    font-size: 24px;
-    font-weight: 500;
+.skill-card {
+    background: var(--bg-color);
+    border-radius: 12px;
+    padding: 30px 25px;
+    box-shadow: 0px 5px 25px rgb(0 0 0 / 8%);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.sub-box p{
-    font-size: var(--p-font);
-    color: var( --secound-color);
-    line-height: 29px;
+.skill-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0px 10px 35px rgb(0 0 0 / 12%);
+}
 
+.skill-icon img {
+    width: 70px;
+    margin-bottom: 15px;
+}
 
+.skill-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.skill-card p {
+    font-size: 14px;
+    color: var(--second-color);
+    line-height: 1.6;
 }
 .sub-box:hover{
-    background: #ffffff;
+    background:#ffffff ;
     box-shadow: 18px 0px 87px 0px rgb(10 15 70/7%);
     border-radius:12px;
     will-change: transform;
     transform: perspective(1000px) rotateX(4.80deg) rotateY(10.23deg) scale3d(1.05,1.05,1.05);
+}
+
+.skills-section {
+    padding: 60px 10%;
+    background-color: #ffffff; /* dark navy */
+}
+
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.skill-card {
+    background: #1e293b;
+    border-radius: 16px;
+    padding: 25px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.skill-icon img {
+    width: 80px;
+    margin-bottom: 15px;
+}
+
+.skill-card h3 {
+    color: #38bdf8;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.skill-card p {
+    color: #cbd5f5;
+    font-size: 14px;
+    line-height: 1.6;
 }
 
 .about{
@@ -328,9 +376,8 @@ header.sticky{
     object-fit: cover;
     border-radius: 12px;
 }
-
-.layer{
-    background:transparent;
+.layer {
+    background: transparent;
     height: 100%;
     width: 100%;
     position: absolute;
@@ -339,45 +386,48 @@ header.sticky{
     border-radius: 12px;
     transition: all .40s;
 
-
+    /* Flexbox pour gérer l'espace automatiquement */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px;
+    box-sizing: border-box;
 }
-.layer:hover{
+
+.layer:hover {
     background: linear-gradient(rgba(0,0,0,0.5) 0%, #191919);
 }
-.layer h3{
-    position: absolute;
+
+.layer h3 {
     width: 100%;
     font-size: 25px;
     font-weight: 500;
     color: var(--bg-color);
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    text-align: center;
     opacity: 0;
+    transform: translateY(20px);
     transition: all .40s;
+    margin: 0;
 }
 
-.layer:hover h3{
-    bottom: 52%;
-    opacity: 1;
-}
-
-.layer h5{
-    position: absolute;
+.layer h5 {
     width: 100%;
     font-size: 17px;
     font-weight: 500;
     color: var(--bg-color);
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    text-align: center;
     opacity: 0;
+    transform: translateY(20px);
     transition: all .40s;
+    margin: 0;
 }
 
-.layer:hover h5{
-    bottom: 48%;
+.layer:hover h3,
+.layer:hover h5 {
     opacity: 1;
+    transform: translateY(0);
 }
 
 .service-content{
@@ -519,36 +569,85 @@ header.sticky{
     margin-bottom: 25px;
 
 }
+.contact {
+    background: var(--second-bg-color);
+    padding: 80px 0;
+}
+
+.contact .center {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.contact .center h3 {
+    font-size: 1rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--main-color);
+    margin-bottom: 10px;
+}
+
+.contact .center h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.contact .center p {
+    font-size: var(--p-font);
+    color: var(--text-color);
+    opacity: 0.75;
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+.contact .action form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
 .contact .action form input[type="email"] {
-    max-width: 100%; 
-    width: 470px;
-    padding: 12px 15px;
+    width: 380px;
+    max-width: 100%;
+    padding: 14px 22px;
     background: var(--bg-color);
     color: var(--text-color);
-    border: none;
+    border: 2px solid rgba(255, 255, 255, 0.1);
     outline: none;
-    margin: 0 10px 20px 0;
-    border-radius: 30px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    transition: border 0.3s ease;
 }
+
+.contact .action form input[type="email"]:focus {
+    border-color: var(--main-color);
+}
+
+.contact .action form input[type="email"]::placeholder {
+    opacity: 0.5;
+}
+
 .contact .action form input[type="submit"] {
-    
-    
-    padding: 12px 40px;
+    padding: 14px 36px;
     background: var(--main-color);
     color: var(--bg-color);
     border: none;
     outline: none;
-    margin: 0 10px 20px 0;
-    border-radius: 30px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
     cursor: pointer;
+    transition: opacity 0.3s ease, transform 0.2s ease;
 }
-.ends{
-    text-align:center;
-    padding: 40px;
-}
-.ends p {
-    font-size:var(--p-font) ;
-    letter-spacing: 1px;
+
+.contact .action form input[type="submit"]:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
 }
 
 @media (max-width:1425px){
@@ -615,7 +714,125 @@ header.sticky{
     }
 
 }
+
+.about {
+    display: flex;
+    align-items: flex-start;
+    gap: 60px;
+    padding: 60px 10%;
+}
+
+/* LEFT — Text */
+.about-text {
+    flex: 1;
+}
+
+.about-text h3 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.about-text p {
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+/* RIGHT — Internships */
+.internships {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.internships-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.internship-card {
+    background: var(--second-bg-color);
+    border-radius: 12px;
+    padding: 18px 20px;
+    border-left: 4px solid var(--main-color);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.internship-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.internship-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.company-logo {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    border-radius: 8px;
+    background: white;
+    padding: 4px;
+}
+
+.internship-meta h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.internship-date {
+    font-size: 13px;
+    color: var(--main-color);
+}
+
+.internship-summary {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #aaa;
+}
+
+.layer-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border: 2px solid var(--bg-color);
+    border-radius: 20px;
+    color: var(--bg-color);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all .40s;
+}
+
+.layer:hover .layer-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.layer-btn:hover {
+    background: var(--bg-color);
+    color: var(--second-bg-color);
+}
+
+/* Responsive */
+
+
 @media (max-width:800px){
+
+    .about {
+        flex-direction: column;
+    }
     .home{
         grid-template-columns: 1fr;
         min-height: 130hv;
