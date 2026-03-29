@@ -155,7 +155,7 @@ span{
 
 .home-text p{
     font-size: var(--p-font);
-    color: var(--secound-color);
+    color: var(--second-color);
     line-height: 28px;
     margin-bottom:20px ;
 
@@ -329,7 +329,7 @@ header.sticky{
 .about-text p{
     max-width: 550px;
     font-size: var(--p-font);
-    color: var(--secound-color);
+    color: var(--second-color);
     line-height: 28px;
     margin-bottom: 45px;
 }
@@ -353,7 +353,7 @@ header.sticky{
 
 .heading p{
     font-size: var(--p-font);
-    color: var(--secound-color);
+    color: var(--second-color);
     line-height: 28px;
 }
 
@@ -676,43 +676,56 @@ header.sticky{
         transition:.3s ;
     }
 }
+
 @media (max-width:920px){
+
     #menu-icon{
         display: block;
+    }
 
+    /* FIX HEADER LOOK */
+    header{
+        background: var(--bg-color);
+        padding: 15px 5%;
+        box-shadow: 0px 2px 10px rgba(0,0,0,0.08);
     }
-    .home{
-        min-height: 80vh;
-    }
+
+    /* CLEAN DROPDOWN MENU */
     .navlist{
         position: absolute;
         top: -600px;
         left: 0;
         right: 0;
+        display: flex;
         flex-direction: column;
-        background: var(--main-color);
-        text-align: right;
-        transition: all .40s;
+        background: var(--bg-color); /* ✅ FIXED */
+        text-align: left;
+        padding: 20px 0;
+        box-shadow: 0px 10px 30px rgba(0,0,0,0.1);
+        transition: all .35s ease;
+    }
 
-    }
-    .navlist a {
-        display: block;
-        padding: 1.2rem;
-        margin: 1.5rem;
-        border-right: 2px solid var(--bg-color);
-        color:var(--bg-color);
-    }
-    .navlist a:hover{
-        background: var(--bg-color);
-        color: var(--main-color);
-    }
-    .navlist a::after{
-        display: none;
-    }
     .navlist.active{
         top: 100%;
     }
 
+    .navlist a{
+        display: block;
+        padding: 15px 25px;
+        margin: 5px 15px;
+        color: var(--text-color); /* ✅ FIXED */
+        border-radius: 8px;
+        transition: background 0.3s;
+    }
+
+    .navlist a:hover{
+        background: rgba(247, 80, 35, 0.1); /* subtle orange */
+        color: var(--main-color);
+    }
+
+    .navlist a::after{
+        display: none;
+    }
 }
 
 .about {
