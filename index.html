@@ -261,10 +261,15 @@
          <p>Have a project in mind or want to discuss an opportunity? Drop your email and I'll get back to you within 24 hours.</p>
       </div>
       <div class="action">
-         <form action="">
-            <input type="email" name="email" placeholder="Your professional email address" required>
-            <input type="submit" value="Send Message">
-         </form>
+         <form action="mailto:your@email.com" method="POST" enctype="text/plain">
+    <input type="email" name="email" placeholder="Your email" required>
+
+    <input type="text" name="subject" placeholder="Subject" required>
+
+    <textarea name="message" rows="5" placeholder="Write your message..." required></textarea>
+
+    <input type="submit" value="Send Message">
+</form>
       </div>
    </div>
 </section>
