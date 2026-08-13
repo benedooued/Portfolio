@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon portefolio</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Mon portfolio</title>
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet"
     href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,13 +22,13 @@
 <body>
     <!--header-->
     <header>
-        <a href="#" class="logo"><img src="images/logo.png" alt="le logo" width="100" height="100"></a>
+        <a href="#" class="logo"><img src="assets/images/logo.png" alt="le logo" width="100" height="100"></a>
         <div class="bx bx-menu" id="menu-icon" ></div>
         <ul class="navlist">
             <li><a href="#home">Home</a></li>
             <li><a href="#skills">Skills</a></li>
             <li><a href="#about">About</a></li>
-            <li><a href="#portefolio">Portefolio</a></li>
+            <li><a href="#portfolio">Case Studies</a></li>
             <li><a href="#service">Service</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
@@ -43,8 +43,12 @@
         <div class="home-text">
             <h3>Hello, I am</h3>
             <h1>Wende Benedo Ariel OUEDRAOGO</h1>
-            <h5>Student <span>in Advanced Machine Learning and Application</span></h5>
-            <p>This is my portefolio</p>
+            <h5>AI Engineer <span>building intelligent business solutions</span></h5>
+            <p>
+                I help businesses build AI chatbots, RAG systems, automation workflows,
+                data dashboards and intelligent web applications.
+            </p>
+            <a href="#contact" class="btn">Start a Project</a>
         
             <div class="social">
                 <a href="https://www.linkedin.com/in/arielwendebenedo-ouedraogo"><i class='bx bxl-linkedin'></i></a>
@@ -52,11 +56,42 @@
             </div>
         </div>
          <div class="home-img">
-            <img src="images/wende_benedo.jpg" alt="" width="300" height="400">
+            <img src="assets/images/wende_benedo.jpg" alt="" width="300" height="400">
 
 
          </div>
     </section>
+
+
+    <section class="solutions" id="solutions">
+  <div class="heading">
+    <h3>Solutions</h3>
+    <h2>What I Can Build For You</h2>
+    <p>Practical AI solutions for businesses, students, startups and organizations.</p>
+  </div>
+
+  <div class="service-content">
+    <div class="row">
+      <h3>AI Chatbots</h3>
+      <p>Custom assistants for websites, customer support, internal documents and FAQs.</p>
+    </div>
+
+    <div class="row">
+      <h3>RAG Systems</h3>
+      <p>Chat with PDFs, reports, academic documents, company files or knowledge bases.</p>
+    </div>
+
+    <div class="row">
+      <h3>Automation Workflows</h3>
+      <p>Automate repetitive tasks using APIs, scripts, AI agents and dashboards.</p>
+    </div>
+
+    <div class="row">
+      <h3>Data Dashboards</h3>
+      <p>Clean, analyze and visualize business data for better decision-making.</p>
+    </div>
+  </div>
+</section>
 
 
    <section class="skills-section" id="skills">
@@ -70,7 +105,7 @@
 
         <div class="skill-card">
             <div class="skill-icon">
-                <img src="images/processor.jpg" alt="Technical Skills">
+                <img src="assets/images/processor.jpg" alt="Technical Skills">
             </div>
             <h3>Technical Skills</h3>
             <p>
@@ -81,7 +116,7 @@
 
         <div class="skill-card">
             <div class="skill-icon">
-                <img src="images/target.jpg" alt="Problem Solving">
+                <img src="assets/images/target.jpg" alt="Problem Solving">
             </div>
             <h3>Problem Solving</h3>
             <p>
@@ -92,7 +127,7 @@
 
         <div class="skill-card">
             <div class="skill-icon">
-                <img src="images/idea.jpg" alt="Soft Skills">
+                <img src="assets/images/idea.jpg" alt="Soft Skills">
             </div>
             <h3>Soft Skills</h3>
             <p>
@@ -103,6 +138,8 @@
 
     </div>
 </section>
+
+
     <section class="about" id="about">
         <div class="about-text">
             <h3>Always seeking for challenge</h3>
@@ -122,7 +159,7 @@
 
             <div class="internship-card">
                 <div class="internship-header">
-                    <img src="images/ares_logo.png" alt="Company Logo" class="company-logo">
+                    <img src="assets/images/ares_logo.png" alt="Company Logo" class="company-logo">
                     <div class="internship-meta">
                         <h4>ARES IT Maroc</h4>
                         <span class="internship-date">Mars 2026 – Now</span>
@@ -135,7 +172,7 @@
 
             <div class="internship-card">
                 <div class="internship-header">
-                    <img src="images/3D_Smart_Factory.png" alt="Company Logo" class="company-logo">
+                    <img src="assets/images/3D_Smart_Factory.png" alt="Company Logo" class="company-logo">
                     <div class="internship-meta">
                         <h4>3D Smart Factory</h4>
                         <span class="internship-date">July 2025 – September 2025</span>
@@ -149,15 +186,15 @@
         </div>
     </section>
 
-<section class="portefolio" id="portefolio">
+<section class="portfolio" id="portfolio">
     <div class="heading">
-        <h3>Portfolio</h3>
-        <h2>Projects</h2>
-        <p>A recap of some work I did.</p>
+        <h3>Case Studies</h3>
+        <h2>Selected AI Projects</h2>
+        <p>Real projects showing how I solve technical problems.</p>
     </div>
     <div class="portfolio-content">
         <div class="col">
-            <img src="images/ids.jpg" alt="" height="350">
+            <img src="assets/images/ids.jpg" alt="" height="350">
             <div class="layer">
                 <h3>Intrusion Detection System</h3>
                 <h5>A detection system able to detect suspicious activity and flag them using Mixture of Experts and LLMs</h5>
@@ -167,7 +204,7 @@
             </div>
         </div>
         <div class="col">
-            <img src="images/external-E-commerce-seo-development-and-marketing-outline-design-circle.jpg" alt="" height="350">
+            <img src="assets/images/external-E-commerce-seo-development-and-marketing-outline-design-circle.jpg" alt="" height="350">
             <div class="layer">
                 <h3>E-commerce website</h3>
                 <h5>A show-off website for online selling</h5>
@@ -177,7 +214,7 @@
             </div>
         </div>
         <div class="col">
-            <img src="images/rag.png" alt="" height="350">
+            <img src="assets/images/rag.png" alt="" height="350">
             <div class="layer">
                 <h3>University RAG system</h3>
                 <h5>A cognitive retrieval system based on students resources</h5>
@@ -196,9 +233,23 @@
       <p>End-to-end expertise across the full technology stack — from infrastructure to intelligent systems.</p>
    </div>
    <div class="service-content">
+
+
+      <div class="row">
+  <div class="s s-six">
+        <img src="assets/images/ai-agent.png" alt="AI Agents">
+        </div>
+            <h3>AI Agents & Automation</h3>
+            <h5>Smart assistants that execute real tasks</h5>
+            <p>
+                I build AI agents connected to APIs, documents and business workflows
+                to automate research, writing, analysis and customer support.
+            </p>
+        </div>
+
       <div class="row">
          <div class="s s-one">
-            <img src="images/back-end.png" alt="Back-end Development">
+            <img src="assets/images/back-end.png" alt="Back-end Development">
          </div>
          <h3>Back-End Development</h3>
          <h5>Robust APIs & Scalable Server Architecture</h5>
@@ -207,7 +258,7 @@
       
       <div class="row">
          <div class="s s-two">
-            <img src="images/data-processing.png" alt="Data Processing">
+            <img src="assets/images/data-processing.png" alt="Data Processing">
          </div>
          <h3>Data Processing</h3>
          <h5>Turning Raw Data into Actionable Insights</h5>
@@ -215,7 +266,7 @@
       </div>
       <div class="row">
          <div class="s s-three">
-            <img src="images/mlops.png" alt="MLOps">
+            <img src="assets/images/mlops.png" alt="MLOps">
          </div>
          <h3>MLOps</h3>
          <h5>Bridging Machine Learning & Production</h5>
@@ -223,7 +274,7 @@
       </div>
       <div class="row">
          <div class="s s-four">
-            <img src="images/DevOps.webp" alt="DevOps">
+            <img src="assets/images/DevOps.webp" alt="DevOps">
          </div>
          <h3>DevOps</h3>
          <h5>Faster Delivery, Stronger Infrastructure</h5>
@@ -231,7 +282,7 @@
       </div>
       <div class="row">
          <div class="s s-five">
-            <img src="images/web-development.svg" alt="Web Development">
+            <img src="assets/images/web-development.svg" alt="Web Development">
          </div>
          <h3>Web Development</h3>
          <h5>Clean, Responsive & User-Centric Interfaces</h5>
@@ -259,12 +310,40 @@
    </div>
 </section>
 
-     <section class="contact" id="contact">
+    <section class="faq" id="faq">
+  <div class="heading">
+    <h3>FAQ</h3>
+    <h2>Before Working Together</h2>
+  </div>
+
+  <div class="faq-content">
+    <div class="faq-item">
+      <h3>Can you build a custom AI chatbot?</h3>
+      <p>Yes. I can build chatbots connected to documents, websites, APIs or databases.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Do you work remotely?</h3>
+      <p>Yes, I can work remotely with clear milestones and regular updates.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Can you deploy the solution?</h3>
+      <p>Yes. I can help deploy web apps, APIs and AI tools using cloud or simple hosting platforms.</p>
+    </div>
+  </div>
+</section>
+
+
+    <section class="contact" id="contact">
    <div class="container">
       <div class="center">
          <h3>Get In Touch</h3>
          <h2>Let's Work <span>Together</span></h2>
-         <p>Have a project in mind or want to discuss an opportunity? Drop your email and I'll get back to you within 24 hours.</p>
+         <p>
+            Need an AI chatbot, automation workflow, dashboard or custom web app?
+            Send me your project idea and I will get back to you.
+        </p>
       </div>
       <div class="action">
     <form id="contact-form">
@@ -275,6 +354,7 @@
   <input type="text" name="subject" placeholder="Subject" required>
 
   <textarea name="message" rows="5" placeholder="Write your message..." required></textarea>
+  <input type="text" name="budget" placeholder="Estimated budget">
 
   <input type="submit" value="Send Message">
 </form>
@@ -302,7 +382,7 @@
             <ul>
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#portefolio">Portfolio</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#service">Services</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
