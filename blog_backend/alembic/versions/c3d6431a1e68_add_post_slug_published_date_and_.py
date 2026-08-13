@@ -3,18 +3,30 @@
 Revision ID: c3d6431a1e68
 Revises: 99436fa3d765
 Create Date: 2026-08-07 04:46:48.680008
-
 """
+
+import re
+import unicodedata
 from typing import Sequence, Union
 
 from alembic import op
 import sqlalchemy as sa
 
 
-import re
-import unicodedata
+# revision identifiers, used by Alembic.
+revision: str = "c3d6431a1e68"
+down_revision: Union[str, Sequence[str], None] = "99436fa3d765"
+branch_labels: Union[str, Sequence[str], None] = None
+depends_on: Union[str, Sequence[str], None] = None
 
 
+NAMING_CONVENTION = {
+    "fk": (
+        "fk_%(table_name)s_"
+        "%(column_0_name)s_"
+        "%(referred_table_name)s"
+    )
+}
 
 
 def create_slug(value: str) -> str:
@@ -37,48 +49,102 @@ def create_slug(value: str) -> str:
     return slug.strip("-").lower() or "article"
 
 
-# revision identifiers, used by Alembic.
-revision: str = 'c3d6431a1e68'
-down_revision: Union[str, Sequence[str], None] = '99436fa3d765'
-branch_labels: Union[str, Sequence[str], None] = None
-depends_on: Union[str, Sequence[str], None] = None
+def get_comments_post_fk_name(connection):
+    """
+    Return the actual foreign-key constraint name used by the DB
+    for comments.post_id -> posts.id.
+
+    PostgreSQL generates a name automatically when none was
+    explicitly specified in the original migration.
+    """
+    inspector = sa.inspect(connection)
+
+    foreign_keys = inspector.get_foreign_keys(
+        "comments"
+    )
+
+    for foreign_key in foreign_keys:
+        if (
+            foreign_key.get("referred_table") == "posts"
+            and foreign_key.get("constrained_columns")
+            == ["post_id"]
+        ):
+            return foreign_key.get("name")
+
+    return None
+
 
 def upgrade() -> None:
     """Add slug, publication date and cascade deletion."""
 
-    # 1. Recreate the comments foreign key with ON DELETE CASCADE.
-    naming_convention = {
-        "fk": (
-            "fk_%(table_name)s_"
-            "%(column_0_name)s_"
-            "%(referred_table_name)s"
-        )
-    }
+    connection = op.get_bind()
+    dialect_name = connection.dialect.name
 
-    with op.batch_alter_table(
-        "comments",
-        schema=None,
-        naming_convention=naming_convention,
-    ) as batch_op:
-        batch_op.drop_constraint(
-            "fk_comments_post_id_posts",
+    # ---------------------------------------------------------
+    # 1. Change comments.post_id FK to ON DELETE CASCADE
+    # ---------------------------------------------------------
+
+    if dialect_name == "sqlite":
+        # SQLite can have truly unnamed foreign-key constraints.
+        # naming_convention gives the reflected constraint a
+        # predictable temporary name so Alembic can drop it.
+        with op.batch_alter_table(
+            "comments",
+            schema=None,
+            naming_convention=NAMING_CONVENTION,
+        ) as batch_op:
+            batch_op.drop_constraint(
+                "fk_comments_post_id_posts",
+                type_="foreignkey",
+            )
+
+            batch_op.create_foreign_key(
+                "fk_comments_post_id_posts",
+                "posts",
+                ["post_id"],
+                ["id"],
+                ondelete="CASCADE",
+            )
+
+    else:
+        # PostgreSQL (and most other DBs) generates a name for
+        # an unnamed FK. Discover that actual name instead of
+        # guessing it.
+        foreign_key_name = get_comments_post_fk_name(
+            connection
+        )
+
+        if foreign_key_name is None:
+            raise RuntimeError(
+                "Foreign key comments.post_id -> posts.id "
+                "was not found."
+            )
+
+        op.drop_constraint(
+            foreign_key_name,
+            "comments",
             type_="foreignkey",
         )
 
-        batch_op.create_foreign_key(
+        op.create_foreign_key(
             "fk_comments_post_id_posts",
+            "comments",
             "posts",
             ["post_id"],
             ["id"],
             ondelete="CASCADE",
         )
 
-    # 2. Add the new columns as nullable.
-    # Existing articles do not yet have slug values.
+    # ---------------------------------------------------------
+    # 2. Add slug and published_at
+    # ---------------------------------------------------------
+
     with op.batch_alter_table(
         "posts",
         schema=None,
     ) as batch_op:
+        # slug is temporarily nullable because existing posts
+        # don't have values yet.
         batch_op.add_column(
             sa.Column(
                 "slug",
@@ -95,8 +161,9 @@ def upgrade() -> None:
             )
         )
 
-    # 3. Populate slug and published_at for existing articles.
-    connection = op.get_bind()
+    # ---------------------------------------------------------
+    # 3. Populate existing posts
+    # ---------------------------------------------------------
 
     posts = connection.execute(
         sa.text(
@@ -111,12 +178,17 @@ def upgrade() -> None:
     used_slugs: set[str] = set()
 
     for post in posts:
-        base_slug = create_slug(post["title"])
+        base_slug = create_slug(
+            post["title"]
+        )
+
         candidate_slug = base_slug
         suffix = 2
 
         while candidate_slug in used_slugs:
-            candidate_slug = f"{base_slug}-{suffix}"
+            candidate_slug = (
+                f"{base_slug}-{suffix}"
+            )
             suffix += 1
 
         used_slugs.add(candidate_slug)
@@ -143,14 +215,19 @@ def upgrade() -> None:
             },
         )
 
-    # 4. Make slug mandatory and create its unique index.
+    # ---------------------------------------------------------
+    # 4. Make slug mandatory + unique
+    # ---------------------------------------------------------
+
     with op.batch_alter_table(
         "posts",
         schema=None,
     ) as batch_op:
         batch_op.alter_column(
             "slug",
-            existing_type=sa.String(length=220),
+            existing_type=sa.String(
+                length=220
+            ),
             nullable=False,
         )
 
@@ -159,36 +236,65 @@ def upgrade() -> None:
             ["slug"],
             unique=True,
         )
+
+
 def downgrade() -> None:
     """Remove slug, publication date and cascade deletion."""
 
-    naming_convention = {
-        "fk": (
-            "fk_%(table_name)s_"
-            "%(column_0_name)s_"
-            "%(referred_table_name)s"
-        )
-    }
+    connection = op.get_bind()
+    dialect_name = connection.dialect.name
 
-    # 1. Restore the foreign key without cascade deletion.
-    with op.batch_alter_table(
-        "comments",
-        schema=None,
-        naming_convention=naming_convention,
-    ) as batch_op:
-        batch_op.drop_constraint(
-            "fk_comments_post_id_posts",
+    # ---------------------------------------------------------
+    # 1. Restore FK without ON DELETE CASCADE
+    # ---------------------------------------------------------
+
+    if dialect_name == "sqlite":
+        with op.batch_alter_table(
+            "comments",
+            schema=None,
+            naming_convention=NAMING_CONVENTION,
+        ) as batch_op:
+            batch_op.drop_constraint(
+                "fk_comments_post_id_posts",
+                type_="foreignkey",
+            )
+
+            batch_op.create_foreign_key(
+                "fk_comments_post_id_posts",
+                "posts",
+                ["post_id"],
+                ["id"],
+            )
+
+    else:
+        foreign_key_name = get_comments_post_fk_name(
+            connection
+        )
+
+        if foreign_key_name is None:
+            raise RuntimeError(
+                "Foreign key comments.post_id -> posts.id "
+                "was not found."
+            )
+
+        op.drop_constraint(
+            foreign_key_name,
+            "comments",
             type_="foreignkey",
         )
 
-        batch_op.create_foreign_key(
+        op.create_foreign_key(
             "fk_comments_post_id_posts",
+            "comments",
             "posts",
             ["post_id"],
             ["id"],
         )
 
-    # 2. Remove the slug index and the two columns.
+    # ---------------------------------------------------------
+    # 2. Remove slug and published_at
+    # ---------------------------------------------------------
+
     with op.batch_alter_table(
         "posts",
         schema=None,
